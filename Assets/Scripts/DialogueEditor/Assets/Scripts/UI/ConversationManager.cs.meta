@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 28fe614b88daf184a841493ff6bdcd86
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - BackgroundImage: {instanceID: 0}
+  - OptionImage: {instanceID: 0}
+  - DialoguePanel: {instanceID: 0}
+  - OptionsPanel: {instanceID: 0}
+  - DialogueBackground: {instanceID: 0}
+  - NpcIcon: {instanceID: 0}
+  - YouIcon: {instanceID: 0}
+  - NameText: {instanceID: 0}
+  - YouText: {instanceID: 0}
+  - DialogueText: {instanceID: 0}
+  - AudioPlayer: {instanceID: 0}
+  - ButtonPrefab: {instanceID: 0}
+  - BlankSprite: {instanceID: 0}
+  - YouSprite: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
