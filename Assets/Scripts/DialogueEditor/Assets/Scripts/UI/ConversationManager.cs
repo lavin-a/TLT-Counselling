@@ -674,13 +674,29 @@ namespace DialogueEditor
             // Display new options
             if (m_currentSpeech.ConnectionType == Connection.eConnectionType.Option)
             {
-                for (int i = 0; i < m_currentSpeech.Connections.Count; i++)
+                int rand = Random.Range(0, m_currentSpeech.Connections.Count);
+                if (rand == 0)
                 {
-                    OptionConnection connection = m_currentSpeech.Connections[i] as OptionConnection;
-                    if (ConditionsMet(connection))
+                    for (int i = 0; i < m_currentSpeech.Connections.Count; i++)
                     {
-                        UIConversationButton uiOption = CreateButton();
-                        uiOption.SetupButton(UIConversationButton.eButtonType.Option, connection.OptionNode);
+                        OptionConnection connection = m_currentSpeech.Connections[i] as OptionConnection;
+                        if (ConditionsMet(connection))
+                        {
+                            UIConversationButton uiOption = CreateButton();
+                            uiOption.SetupButton(UIConversationButton.eButtonType.Option, connection.OptionNode);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = m_currentSpeech.Connections.Count - 1; i >= 0; i--)
+                    {
+                        OptionConnection connection = m_currentSpeech.Connections[i] as OptionConnection;
+                        if (ConditionsMet(connection))
+                        {
+                            UIConversationButton uiOption = CreateButton();
+                            uiOption.SetupButton(UIConversationButton.eButtonType.Option, connection.OptionNode);
+                        }
                     }
                 }
             }
