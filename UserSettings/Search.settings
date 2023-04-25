@@ -10,6 +10,12 @@ scopes = {
 	"last_search.F8949528" = "sceneloader"
 	"OpenInspectorPreview.F8949528" = "0"
 	"currentGroup.F8949528" = "all"
+	"last_search.3619CCAF" = "memory"
+	"OpenInspectorPreview.3619CCAF" = "0"
+	"currentGroup.3619CCAF" = "all"
+	"last_search.C4949528" = "Microphone t:AudioClip"
+	"OpenInspectorPreview.C4949528" = "0"
+	"currentGroup.C4949528" = "asset"
 }
 providers = {
 	adb = {

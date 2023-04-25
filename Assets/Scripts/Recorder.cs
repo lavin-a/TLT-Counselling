@@ -2,17 +2,9 @@
 using System.IO;
 using System.Text;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using Facebook.WitAi;
-using Facebook.WitAi.Lib;
-using UnityGoogleDrive;
-using UnityEditor;
 
 #if UNITY_IOS
 using UnityEngine.iOS;
@@ -60,7 +52,6 @@ namespace Oculus.Voice.Demo
         /// </summary>
         private int minute = 0, second = 0;
         private int timeToRecord = 3599;
-        private GoogleDriveFiles.CreateRequest request;
         private string result;
         StreamWriter writer;
 
@@ -92,7 +83,7 @@ namespace Oculus.Voice.Demo
 
         private void Update()
         {
-           
+
 
             if (recordingTime >= timeToRecord)
             {
@@ -106,32 +97,11 @@ namespace Oculus.Voice.Demo
                 minute = (int)(recordingTime / 60);
                 second = (int)(recordingTime % 60);
 
-            }      
-        }
-
-        #endregion
-
-        #region Other Functions
-
-
-        IEnumerator ScaleOverTime(GameObject button, float scaleFactor)
-        {
-            Vector3 originalScale = button.transform.localScale;
-            Vector3 destinationScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
-
-            float currentTime = 0.0f;
-
-            do
-            {
-                button.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / 0.5f);
-                currentTime += Time.deltaTime;
-                yield return null;
             }
-            while (currentTime <= 1f);
         }
 
         #endregion
-        
+
         #region Recorder Functions
 
         public void StartRecording()
@@ -180,8 +150,11 @@ namespace Oculus.Voice.Demo
                 {
                     WriteWAVFile(audioClip, filePath);
                     Debug.Log("File Saved Successfully at " + filePath);
-                    Upload(false, filePath);
-                    writer.Close();
+                    var uploader = (Uploader)gameObject.GetComponent(typeof(Uploader));
+                    if (uploader != null)
+                    {
+                        uploader.UploadFile(filePath);
+                    }
                 }
                 catch (DirectoryNotFoundException)
                 {
@@ -190,29 +163,9 @@ namespace Oculus.Voice.Demo
 
                 isRecording = false;
                 Microphone.End(Microphone.devices[0]);
+                AudioClip.Destroy(audioClip, 10.0f);
+                AudioClip.Destroy(audioSource.clip, 10.0f);
             }
-        }
-        
-        private void Upload(bool toAppData, String filePath)
-        {
-            var content = File.ReadAllBytes(filePath);
-            if (content == null) return;
-
-            var file = new UnityGoogleDrive.Data.File() { Name = Path.GetFileName(filePath), Content = content };
-            if (toAppData) file.Parents = new List<string> { "appDataFolder" };
-            request = GoogleDriveFiles.Create(file);
-            request.Fields = new List<string> { "id", "name", "size", "createdTime" };
-            request.Send().OnDone += PrintResult;
-        }
-
-        private void PrintResult(UnityGoogleDrive.Data.File file)
-        {
-            result = string.Format("Name: {0} Size: {1:0.00}MB Created: {2:dd.MM.yyyy HH:MM:ss}\nID: {3}",
-                    file.Name,
-                    file.Size * .000001f,
-                    file.CreatedTime,
-                    file.Id);
-            Debug.Log(result);
         }
 
         public static byte[] ConvertWAVtoByteArray(string filePath)
@@ -311,85 +264,6 @@ namespace Oculus.Voice.Demo
                 }
 
                 fs.Write(bytesData, 0, bytesData.Length);
-            }
-        }
-
-        public bool IsActive => _active;
-        private bool _active = false;
-
-        // Add delegates
-        private void OnEnable()
-        {
-            appVoiceExperience.events.OnRequestCreated.AddListener(OnRequestStarted);
-           /* appVoiceExperience.events.OnPartialTranscription.AddListener(OnRequestTranscript);
-            appVoiceExperience.events.OnFullTranscription.AddListener(OnRequestTranscript);
-            appVoiceExperience.events.OnStartListening.AddListener(OnListenStart);
-            appVoiceExperience.events.OnStoppedListening.AddListener(OnListenStop);
-            appVoiceExperience.events.OnStoppedListeningDueToDeactivation.AddListener(OnListenForcedStop);*/
-            appVoiceExperience.events.OnResponse.AddListener(OnRequestResponse);
-          appVoiceExperience.events.OnError.AddListener(OnRequestError);
-        }
-        // Remove delegates
-        private void OnDisable()
-        {
-            appVoiceExperience.events.OnRequestCreated.RemoveListener(OnRequestStarted);
- /*           appVoiceExperience.events.OnPartialTranscription.RemoveListener(OnRequestTranscript);
-            appVoiceExperience.events.OnFullTranscription.RemoveListener(OnRequestTranscript);
-            appVoiceExperience.events.OnStartListening.RemoveListener(OnListenStart);
-            appVoiceExperience.events.OnStoppedListening.RemoveListener(OnListenStop);
-            appVoiceExperience.events.OnStoppedListeningDueToDeactivation.RemoveListener(OnListenForcedStop);*/
-            appVoiceExperience.events.OnResponse.RemoveListener(OnRequestResponse);
-            appVoiceExperience.events.OnError.RemoveListener(OnRequestError);
-        }
-
-        // Request began
-        private void OnRequestStarted(WitRequest r)
-        {
-            // Begin
-            _active = true;
-        }
-        // Request response
-        private void OnRequestResponse(WitResponseNode response)
-        {
-            string path = Path.Combine(Application.persistentDataPath, "transcript" + " " + DateTime.UtcNow.ToString("yyyy_MM_dd HH_mm_ss_ffff") + ".txt");
-            writer = new StreamWriter(path, true);
-            if (!string.IsNullOrEmpty(response["text"]))
-                {
-                    writer.WriteLine(response["text"]);
-                 Debug.Log("Response: " + response["text"]);
-            }
-        }
-        // Request error
-        private void OnRequestError(string error, string message)
-        {
-            OnRequestComplete();
-        }
-
-        // Deactivate
-        private void OnRequestComplete()
-        {
-            _active = false;
-        }
-
-        // Toggle activation
-        public void ToggleActivation()
-        {
-            SetActivation(!_active);
-        }
-        // Set activation
-        public void SetActivation(bool toActivated)
-        {
-            if (_active != toActivated)
-            {
-                _active = toActivated;
-                if (_active)
-                {
-                    appVoiceExperience.Activate();
-                }
-                else
-                {
-                    appVoiceExperience.Deactivate();
-                }
             }
         }
     }
