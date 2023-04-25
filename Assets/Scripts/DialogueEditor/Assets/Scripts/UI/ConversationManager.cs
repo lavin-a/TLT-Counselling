@@ -671,6 +671,7 @@ namespace DialogueEditor
 
         private void CreateUIOptions()
         {
+            Canvas.ForceUpdateCanvases();
             // Display new options
             if (m_currentSpeech.ConnectionType == Connection.eConnectionType.Option)
             {
@@ -731,10 +732,9 @@ namespace DialogueEditor
                         uiOption.SetupButton(UIConversationButton.eButtonType.End, null, endFont: m_conversation.EndConversationFont);
                     }
                 }
-
             }
             SetSelectedOption(0);
-
+            Canvas.ForceUpdateCanvases();
             // Set the button sprite and alpha
             for (int i = 0; i < m_uiOptions.Count; i++)
             {
@@ -751,6 +751,7 @@ namespace DialogueEditor
                 GameObject.Destroy(m_uiOptions[0].gameObject);
                 m_uiOptions.RemoveAt(0);
             }
+            Canvas.ForceUpdateCanvases();
         }
 
         private void SetColorAlpha(MaskableGraphic graphic, float a)

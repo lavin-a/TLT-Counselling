@@ -18,9 +18,6 @@ namespace Oculus.Voice.Demo
     [RequireComponent(typeof(AudioSource), typeof(EventTrigger))]
     public class Recorder : MonoBehaviour
     {
-        #region Constants &  Static Variables
-        [SerializeField] private AppVoiceExperience appVoiceExperience;
-        [SerializeField] private Text textArea;
 
         /// <summary>
         /// Audio Source to store Microphone Input, An AudioSource Component is required by default
@@ -34,8 +31,6 @@ namespace Oculus.Voice.Demo
         /// WAV file header size
         /// </summary>
         const int HEADER_SIZE = 44;
-
-        #endregion
 
         #region Private Variables
 
@@ -52,8 +47,6 @@ namespace Oculus.Voice.Demo
         /// </summary>
         private int minute = 0, second = 0;
         private int timeToRecord = 3599;
-        private string result;
-        StreamWriter writer;
 
         #endregion
 
@@ -139,7 +132,11 @@ namespace Oculus.Voice.Demo
 
                 // Assign Current Audio Clip to Audio Player
 
-                string filePath = Path.Combine(Application.persistentDataPath, fileName + " " + DateTime.UtcNow.ToString("yyyy_MM_dd HH_mm_ss_ffff") + ".wav");
+                string filePath = Path.Combine(Application.persistentDataPath, fileName + " " + SystemInfo.deviceUniqueIdentifier + " " + DateTime.UtcNow.ToString("yyyy_MM_dd HH_mm_ss_ffff") + ".wav");
+
+                // #if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX || UNITY_IOS || UNITY_ANDROID
+                //     filePath = "file:///" + filePath;
+                // #endif
 
                 // Delete the file if it exists.
                 if (File.Exists(filePath))

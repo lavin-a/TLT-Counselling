@@ -28,11 +28,11 @@ public class Uploader: MonoBehaviour
     IEnumerator Upload(string path)
     {
         uploadStatus = UploadStatus.started;
-
+        Debug.Log(path + " " + uploadStatus);
         WWWForm form = new WWWForm();
-        UnityWebRequest dataFile = UnityWebRequest.Get(path);
+        UnityWebRequest dataFile = UnityWebRequest.Get("file://" + path);
         yield return dataFile.SendWebRequest();
-        form.AddBinaryData("dataFile", dataFile.downloadHandler.data, Path.GetFileName(path));
+        form.AddBinaryData("dataFile", dataFile.downloadHandler.data, Path.GetFileName("file://" + path));
         using (UnityWebRequest req = UnityWebRequest.Post("https://unity.lavinamarnani.com/counselling/getFile.php", form))
         {
             uploadStatus = UploadStatus.completed;
