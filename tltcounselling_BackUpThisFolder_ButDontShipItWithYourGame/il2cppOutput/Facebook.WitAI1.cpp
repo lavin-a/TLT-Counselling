@@ -10416,10 +10416,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WitRequestOptions__ctor_mC268FEEBCAC2DAB
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 WitRuntimeConfiguration_get_RecordingTimeRange_m62B36299D25C617A18EA915441EB88544C596228 (WitRuntimeConfiguration_t74ABC500731591BA8D99A1C88E1821020551D3B3* __this, const RuntimeMethod* method) 
 {
 	{
-		// protected virtual Vector2 RecordingTimeRange => new Vector2(0, 20);
+		// protected virtual Vector2 RecordingTimeRange => new Vector2(0, 9999);
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_0;
 		memset((&L_0), 0, sizeof(L_0));
-		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_0), (0.0f), (20.0f), /*hidden argument*/NULL);
+		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_0), (0.0f), (9999.0f), /*hidden argument*/NULL);
 		return L_0;
 	}
 }
@@ -10433,8 +10433,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WitRuntimeConfiguration__ctor_m259A9FD2B
 		__this->___minKeepAliveTimeInSeconds_2 = (2.0f);
 		// public float minTranscriptionKeepAliveTimeInSeconds = 1f;
 		__this->___minTranscriptionKeepAliveTimeInSeconds_3 = (1.0f);
-		// public float maxRecordingTime = 20;
-		__this->___maxRecordingTime_4 = (20.0f);
+		// public float maxRecordingTime = 9999;
+		__this->___maxRecordingTime_4 = (9999.0f);
 		// [SerializeField] public float soundWakeThreshold = .0005f;
 		__this->___soundWakeThreshold_5 = (0.000500000024f);
 		// [Range(10, 500)] [SerializeField] public int sampleLengthInMs = 10;

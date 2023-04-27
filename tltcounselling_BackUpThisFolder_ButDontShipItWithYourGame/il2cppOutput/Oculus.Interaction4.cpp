@@ -9160,7 +9160,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ActiveStateGroupModel_GetChild
 		ActiveStateGroup_tE37F4D8ACC95010ED7AB1CCE0B2BA1908519D9F9* L_2 = ___group0;
 		NullCheck(L_1);
 		RuntimeObject* L_3;
-		L_3 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(21 /* System.Object System.Reflection.FieldInfo::GetValue(System.Object) */, L_1, L_2);
+		L_3 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(22 /* System.Object System.Reflection.FieldInfo::GetValue(System.Object) */, L_1, L_2);
 		V_0 = ((List_1_tA5E66D1BD80F6F91F291E59395D3F01B878ACDAB*)IsInstClass((RuntimeObject*)L_3, List_1_tA5E66D1BD80F6F91F291E59395D3F01B878ACDAB_il2cpp_TypeInfo_var));
 		// return children;
 		List_1_tA5E66D1BD80F6F91F291E59395D3F01B878ACDAB* L_4 = V_0;
@@ -9258,7 +9258,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* SequenceModel_GetChildren_m368
 		Sequence_t50A8D51B81FDFEC29CA244607C23F1F42C99D0D3* L_2 = ___sequence0;
 		NullCheck(L_1);
 		RuntimeObject* L_3;
-		L_3 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(21 /* System.Object System.Reflection.FieldInfo::GetValue(System.Object) */, L_1, L_2);
+		L_3 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(22 /* System.Object System.Reflection.FieldInfo::GetValue(System.Object) */, L_1, L_2);
 		V_0 = ((ActivationStepU5BU5D_t63526ACF8651409C10F77F8EB0F4C67BD87DF8A1*)IsInst((RuntimeObject*)L_3, ActivationStepU5BU5D_t63526ACF8651409C10F77F8EB0F4C67BD87DF8A1_il2cpp_TypeInfo_var));
 		// List<IActiveState> children = new List<IActiveState>(
 		//     steps.Select(GetActiveStateFromStep));
@@ -9367,7 +9367,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* SequenceActiveStateModel_GetCh
 		SequenceActiveState_t29B92FE644C3A96E3298751837EC74141520BF99* L_2 = ___seqActiveState0;
 		NullCheck(L_1);
 		RuntimeObject* L_3;
-		L_3 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(21 /* System.Object System.Reflection.FieldInfo::GetValue(System.Object) */, L_1, L_2);
+		L_3 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(22 /* System.Object System.Reflection.FieldInfo::GetValue(System.Object) */, L_1, L_2);
 		V_0 = ((Sequence_t50A8D51B81FDFEC29CA244607C23F1F42C99D0D3*)IsInstClass((RuntimeObject*)L_3, Sequence_t50A8D51B81FDFEC29CA244607C23F1F42C99D0D3_il2cpp_TypeInfo_var));
 		// return new List<IActiveState>() { sequence };
 		List_1_tA5E66D1BD80F6F91F291E59395D3F01B878ACDAB* L_4 = (List_1_tA5E66D1BD80F6F91F291E59395D3F01B878ACDAB*)il2cpp_codegen_object_new(List_1_tA5E66D1BD80F6F91F291E59395D3F01B878ACDAB_il2cpp_TypeInfo_var);
@@ -9446,7 +9446,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ActiveStateNotModel_GetChildre
 		ActiveStateNot_tA9490645D62D2BFB57A5191817F9C8DB71EA8C3A* L_4 = ___not0;
 		NullCheck(L_3);
 		RuntimeObject* L_5;
-		L_5 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(21 /* System.Object System.Reflection.FieldInfo::GetValue(System.Object) */, L_3, L_4);
+		L_5 = VirtualFuncInvoker1< RuntimeObject*, RuntimeObject* >::Invoke(22 /* System.Object System.Reflection.FieldInfo::GetValue(System.Object) */, L_3, L_4);
 		NullCheck(L_1);
 		List_1_Add_m91849044F064C7E4A2B2A552A71BEE55FB71EF40_inline(L_1, ((RuntimeObject*)IsInst((RuntimeObject*)L_5, IActiveState_tE0F401037570483F58CD8CD4ED2A862D494517EB_il2cpp_TypeInfo_var)), List_1_Add_m91849044F064C7E4A2B2A552A71BEE55FB71EF40_RuntimeMethod_var);
 		List_1_tA5E66D1BD80F6F91F291E59395D3F01B878ACDAB* L_6 = V_1;

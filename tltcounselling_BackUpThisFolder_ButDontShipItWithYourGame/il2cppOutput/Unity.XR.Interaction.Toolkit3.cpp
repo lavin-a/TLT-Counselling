@@ -23653,7 +23653,7 @@ IL_0026_1:
 				XRTargetEvaluator_t5B05D5A70C86720DA2EF19C671D2E4A944F85187* L_8 = V_2;
 				NullCheck(L_7);
 				bool L_9;
-				L_9 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(114 /* System.Boolean System.Type::IsInstanceOfType(System.Object) */, L_7, L_8);
+				L_9 = VirtualFuncInvoker1< bool, RuntimeObject* >::Invoke(117 /* System.Boolean System.Type::IsInstanceOfType(System.Object) */, L_7, L_8);
 				V_3 = L_9;
 				bool L_10 = V_3;
 				if (!L_10)
