@@ -161,7 +161,7 @@ public class SpeechGenerationForNPCs : EditorWindow
             }
 
 
-            if (www_audio.isNetworkError)
+            if (www_audio.result == UnityWebRequest.Result.ConnectionError)
             {
                 UnityEngine.Debug.LogError(www_audio.error);
             }
